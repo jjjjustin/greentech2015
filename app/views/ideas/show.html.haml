@@ -1,0 +1,74 @@
+#ideas-show
+  .row
+    .col-md-12
+      %ol.breadcrumb
+        %li
+          = link_to 'My Ideas', ideas_path
+        %li
+          = @idea.name
+
+  .row
+    .col-md-12
+      .idea-content
+
+        .idea-header
+          %h1
+            = @idea.name
+          %p
+            - if @idea.description.blank?
+              No description available.
+            - else
+              = @idea.description
+
+        .idea-body
+          - @template.lessons.each do |lesson|
+            .lesson
+              / calculate lesson completion
+              - lesson_question_total = 0
+              - lesson_response_total = 0
+              - lesson.steps.each do |step|
+                - lesson_question_total += step.fields.count
+                - lesson_response_total += step.responses.where(active: true, idea_id: @idea.id).count
+              
+              .lesson-status
+                
+                - if lesson_response_total == 0
+                  %h2.not-started
+                    %i.fa.fa-circle
+                - elsif lesson_response_total < lesson_question_total
+                  %h2.in-progress
+                    %i.fa.fa-circle
+                - else
+                  %h2.completed
+                    %i.fa.fa-circle
+
+              %h2
+                = 'Lesson ' + lesson.position.to_s + ': '
+                = lesson.title
+
+              - unless lesson.description.blank?
+                %p=lesson.description
+
+
+              - lesson.steps.each do |step|
+                .step
+                  / calculate step completion
+                  - step_question_total = step.fields.count
+                  - step_response_total = step.responses.where(active: true, idea_id: @idea.id).count
+
+                  .step-status
+                    - if step_response_total == step_question_total
+                      %h4.completed
+                        %i.fa.fa-circle-o
+                    - elsif step_response_total == 0 
+                      %h4.not-started
+                        %i.fa.fa-circle-o
+                    - else
+                      %h4.in-progress
+                        %i.fa.fa-circle-o
+                  .step-description
+                    %h4.step-title
+                      = link_to submit_step_path(step, idea: @idea.id) do
+                        = 'Step ' + step.position.to_s + ': '
+                        = step.title
+

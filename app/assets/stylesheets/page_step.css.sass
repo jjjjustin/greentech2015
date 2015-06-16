@@ -1,0 +1,70 @@
+.step-page-description
+  margin-bottom: 30px
+
+#field_form
+  background-color: rgba(255, 255, 255, 0.5)
+  padding: 20px 20px
+
+  -webkit-border-radius: 2px
+  -moz-border-radius: 2px
+  border-radius: 2px
+
+
+#answers, .field_answers
+  margin: 20px 0
+  padding: 20px 0
+  border: 1px solid $gray-light
+  border-left: none
+  border-right: none
+
+  .form-group
+    margin-bottom: 5px
+
+  .remove_fields
+    display: block
+    margin-bottom: 20px
+
+
+ol.sortable-fields
+  li.field
+    border: 1px solid $gray-light
+    border-left: 3px solid $theme-color-1-2
+    border-bottom: none
+    background-color: $theme-neutral-light
+
+    &:last-child
+      border-bottom: 1px solid $gray-light
+
+    .icon-move, .field-header
+      font-size: 1.5em
+
+    .icon-move
+      padding-top: 7px
+
+    .field-header, .field-actions
+      display: inline-block
+
+    .field-header
+      width: 70%
+      vertical-align: middle
+
+    .field-actions
+      width: 29%
+      text-align: right
+      vertical-align: middle
+
+      .action
+        margin-left: 10px
+        margin-right: 10px
+        color: $gray-dark
+
+    .answers
+      margin: 10px 30px 10px 50px
+
+
+
+  li.placeholder
+    &:before
+      border: 5px solid transparent
+      border-left-color: $brand-info
+      border-right: none

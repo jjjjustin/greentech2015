@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Idea Completed</h1>
+    <p><%= link_to @user.email, user_url(@user) %> has completed <%= link_to @idea.name, idea_show_admin_url(@idea) %>.</p>
+  </body>
+</html>

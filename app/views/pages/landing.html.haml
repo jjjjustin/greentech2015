@@ -1,0 +1,73 @@
+.jumbotron
+
+  - flash.each do |message_type, message|
+    - flash_class = "alert alert-#{message_type} alert-dismissible"
+    - if message_type == "notice"
+      - flash_class += " alert-info"
+    - if message_type == "alert"
+      - flash_class += " alert-danger"
+    %div{class: flash_class, role: "alert"}
+      %button.close{"data-dismiss" => "alert", :type => "button"}
+        %span{"aria-hidden" => "true"} &times;
+        %span.sr-only Close
+      = sanitize(message)
+  
+  .jumbotron-text-container
+    %h1.inverse Your startup roadmap
+    %h5.inverse Create a purpose driven startup by identifying your personal brand and incorporating it into your latest big ideas
+    = link_to 'Start Now for Free', new_user_registration_path, class: "button btn-primary btn-lg"
+
+#benefits-web-1.benefits
+  .container
+    %h1.text-center Create a job you love
+
+    .row
+      .col-lg-6
+        = image_tag 'nafasi-personal-brand.png', class: "img-responsive"
+      .col-lg-6
+        .text-content
+          %h2 Build Your Personal Brand
+          %p Nafasi will help you identify the skills, experiences, and natural abilities that set you apart from others who may have a similar idea.
+    #center-benefit
+      .row
+        .col-lg-6
+          .text-content
+            %h2 Refine Your Idea
+            %p Answer questions specifically designed to help you develop a 1-page business plan that can be updated as you continue to test your assumptions.
+        .col-lg-6
+          = image_tag 'nafasi-refine-idea.png', class: "img-responsive"
+    #center-benefit-responsive
+      .row
+        .col-lg-6
+          = image_tag 'nafasi-refine-idea.png', class: "img-responsive"
+        .col-lg-6
+          .text-content
+            %h2 Refine Your Idea
+            %p Answer questions specifically designed to help you develop a 1-page business plan that can be updated as you continue to test your assumptions.
+    .row
+      .col-lg-6
+        = image_tag 'nafasi-free-mind.png', class: "img-responsive"
+      .col-lg-6
+        .text-content
+          %h2 Free Your Mind
+          %p Let nafasi give your brain the space it needs to be creative about your ideas. We'll securely store them all online while you focus on execution.
+
+
+.call-to-action
+  %h1.inverse Ready to pursue your passion?
+  %h3.inverse Join nafasi today and create the dream job you’ve always wished you had.
+  = link_to "Start Now for Free", new_user_registration_path, class: "button btn-primary btn-lg"
+
+.footer
+  .container
+    .col-sm-4.col-lg-4
+      %p.text-left © 2014 nafasi
+    .col-sm-4.col-lg-4
+      %p.text-center
+        = link_to 'Privacy Policy', privacy_path
+    .col-sm-4.col-lg-4
+      .text-right
+        = link_to 'https://www.facebook.com/nafasiapp' do
+          = image_tag 'facebook-48.png'
+        = link_to 'https://twitter.com/nafasiapp' do
+          = image_tag 'twitter-48.png'

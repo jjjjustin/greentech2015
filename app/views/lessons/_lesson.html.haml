@@ -1,0 +1,70 @@
+%li.lesson{'data-id' => lesson.id, class: 'lesson'+lesson.id.to_s}
+  %i.fa.fa-bars.icon-move.move-lesson
+  .content
+    .lesson-header
+      Lesson:
+      = lesson.title
+    .lesson-actions
+      %span.action
+        %button.btn.btn-info.btn-sm{"data-target" => "#addStepModal#{lesson.id}", "data-toggle" => "modal"}
+          Add Step
+
+      %span.action
+        %i.fa.fa-cog{"data-target" => "#updateLessonModal#{lesson.id}", "data-toggle" => "modal"}
+      %span.action
+        = link_to lesson, method: :delete, data: { confirm: 'Are you sure you want to delete lesson '+lesson.title }, title: 'delete '+lesson.title, class: 'lesson-delete' do
+          &times;
+    %p.description
+      - if lesson.description.blank?
+        No description available.
+      - else
+        = lesson.description
+
+  %ol.sortable.sortable-steps{ id: "steps_for_lesson#{lesson.id}", 'data-container-lesson-id' => lesson.id}
+    - lesson.steps.each do |step|
+      = render step
+
+
+  / Add new step modal
+  .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", id: "addStepModal#{lesson.id}"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+            %span.sr-only Close
+          %h4#myModalLabel.modal-title
+            Add Step to
+            = lesson.title
+
+        = simple_form_for @step, remote: true do |f|
+          .modal-body
+            = f.input :title, required: true
+            = f.input :description
+            = f.input :lesson_id, as: :hidden, input_html: { value: lesson.id }
+          .modal-footer
+            = button_tag(type: 'submit', class: "btn btn-info") do
+              %i.fa.fa-check-circle-o
+              Add Step
+
+
+  / Edit lesson modal
+  .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", id: "updateLessonModal#{lesson.id}"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+            %span.sr-only Close
+          %h4#myModalLabel.modal-title
+            Update
+            = lesson.title
+
+        = simple_form_for lesson, remote: true do |f|
+          .modal-body
+            = f.input :title, required: true
+            = f.input :description
+          .modal-footer
+            = button_tag(type: 'submit', class: "btn btn-info") do
+              %i.fa.fa-check-circle-o
+              Update Lesson

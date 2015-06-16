@@ -1,0 +1,5 @@
+<% unless @step.errors.any? %>
+  $("#steps_for_lesson<%= @step.lesson_id %>").append("<%= escape_javascript(render @step) %>");
+  $('#addStepModal<%= @step.lesson_id %>').find('textarea, input:not([type=submit]):not([type=hidden])').val('');
+  $('#addStepModal<%= @step.lesson_id %>').modal('hide');
+<% end %>

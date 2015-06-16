@@ -1,0 +1,21 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        = @user.email + "'s profile"
+
+.row
+  .col-md-12
+
+    - if @user.user_profile
+      .user_profile
+        - if @user.user_profile.linkedin
+          = link_to @user.user_profile.linkedin, target: "_blank" do
+            %i.fa.fa-linkedin-square
+            LinkedIn Profile
+
+        - if @user.user_profile.profession
+          = @user.user_profile.profession
+
+        - if @user.user_profile.location
+          = @user.user_profile.location

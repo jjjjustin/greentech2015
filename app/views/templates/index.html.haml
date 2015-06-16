@@ -1,0 +1,6 @@
+.row
+  - if @templates.any?
+    - @templates.each do |template|
+      %h3
+        = link_to template.name, template
+

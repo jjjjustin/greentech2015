@@ -1,0 +1,5 @@
+<% unless @lesson.errors.any? %>
+  $("#lessons").append("<%= escape_javascript(render @lesson) %>");
+  $('#addLessonModal').find('textarea, input:not([type=submit]):not([type=hidden])').val('');
+  $('#addLessonModal').modal('hide');
+<% end %>

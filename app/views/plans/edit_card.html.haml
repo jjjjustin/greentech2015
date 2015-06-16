@@ -1,0 +1,42 @@
+#edit-card
+
+  .row
+    .col-md-12
+      .page-header
+        %h1
+          Update My Card
+
+  .row
+    .col-md-6
+      .form-content.clearfix
+        = form_for @plan, url: plan_update_card_path(@plan), html: { id: "payment-form" } do |f|
+          %span.payment-errors
+
+          = render partial: 'stripe_form'
+
+          .col-md-12
+            = button_tag(type: 'submit', class: "btn btn-primary btn-lg") do
+              %i.fa.fa-check-circle-o
+              Update Card
+
+      .current-card-info
+        %h3
+          Current card:
+        - if @current_card
+          = ' **** **** **** ' + @current_card.last4.to_s
+          %br
+          = @current_card.brand + ', expires ' + @current_card.exp_month.to_s + '/' + @current_card.exp_year.to_s
+          %br
+
+          - if @plan.plan_id.blank? && @plan.stripe_subscription_id.blank? && @current_card
+            = link_to 'Remove current card', plan_remove_card_path(@plan), method: :patch
+          - else
+            Unsubscribe from your current subscription to enable removing this card.
+        - else
+          No card on file.
+
+    .col-md-6
+      .card-wrapper
+
+    
+

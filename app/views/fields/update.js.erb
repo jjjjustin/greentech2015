@@ -1,0 +1,6 @@
+<% unless @field.errors.any? %>
+  $('#updateFieldModal<%= @field.id %>').modal('hide');
+  $('#updateFieldModal<%= @field.id %>').on('hidden.bs.modal', function (e) {
+    $('.field<%= @field.id %>').replaceWith("<%= escape_javascript(render @field) %>");
+  });
+<% end %>

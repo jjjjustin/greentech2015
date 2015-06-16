@@ -1,0 +1,24 @@
+#edit-card
+  .row
+    .col-md-12
+      .page-header
+        %h1
+          Enter your payment info
+
+  .row
+    .col-md-6
+      .form-content.clearfix
+        = form_for @plan, html: { id: "payment-form" } do |f|
+          %span.payment-errors
+
+          = f.hidden_field :plan_id, value: params[:plan_id]
+
+          = render partial: 'stripe_form'
+
+          .col-md-12
+            = button_tag(type: 'submit', class: "btn btn-primary btn-lg") do
+              %i.fa.fa-check-circle-o
+              Submit Card
+
+    .col-md-6
+      .card-wrapper

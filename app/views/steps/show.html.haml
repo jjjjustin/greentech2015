@@ -1,0 +1,34 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        Step:
+        = @step.title
+    %p.step-page-description
+      - if @step.description.blank?
+        No description available.
+      - else
+        = @step.description
+.row
+  .col-md-4
+    #field_form
+      = simple_form_for @field, remote: true do |f|
+        = f.input :question
+        = f.input :question_type, collection: ["Text", "MultiChoice", "Number", "Checkbox", "Dropdown"], prompt: "Select question type"
+        = f.input :step_id, as: :hidden, input_html: { value: @step.id }
+        
+        #answers
+          %p
+            Add answer choices for multiple choice, checkbox, and dropdown question types below.
+          = f.simple_fields_for :answers do |answer|
+            = render 'answer_fields', :f => answer
+          .links
+            = link_to_add_association 'add answer', f, :answers, :class => 'btn btn-info btn-sm'
+        
+        = button_tag(type: 'submit', class: "btn btn-primary btn-lg") do
+          %i.fa.fa-check-circle-o
+          Add Field
+  .col-md-8
+    %ol#fields.sortable.sortable-fields{'data-update-field-url' => sort_fields_path}
+      = render @fields
+

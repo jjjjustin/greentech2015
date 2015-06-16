@@ -1,0 +1,23 @@
+.col-md-12
+  .form-row.form-group
+    = label_tag :card_number
+    = text_field_tag :card_number, nil, name: nil, data: { stripe: "number" }, size: 20, id: "card-number", class: "form-control"
+
+.col-md-12
+  .form-row.form-group
+    = label_tag :cvc, 'CVC'
+    = text_field_tag :cvc, nil, name: nil, data: { stripe: "cvc" }, size: 4, id: "card-cvc-", class: "form-control"
+
+.col-md-6
+  .form-row.form-group
+    = label_tag 'Expiration Month (MM)'
+    = text_field_tag :expiration_month, nil, name: nil, data: { stripe: "exp-month" }, size: 2, id: "card-month", class: "form-control"
+.col-md-6
+  .form-row.form-group
+    = label_tag 'year (YYYY)'
+    = text_field_tag :expiration_year, nil, name: nil, data: { stripe: "exp-year" }, id: "card-year", class: "form-control"
+
+.col-md-12
+  .form-row.form-group
+    = label_tag :card_name, 'Full name'
+    = text_field_tag :card_number, nil, name: nil, data: { stripe: "name" }, id: "card-name", class: "form-control"

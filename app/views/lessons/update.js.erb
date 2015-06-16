@@ -1,0 +1,9 @@
+<% unless @lesson.errors.any? %>
+  $('#updateLessonModal<%= @lesson.id %>').modal('hide');
+  $('.lesson<%= @lesson.id %>').find('.lesson-header').text('Lesson: <%= @lesson.title %>');
+  <% if @lesson.description.blank? %>
+    $('.lesson<%= @lesson.id %>').find('p.description').text('No description available.');
+  <% else %>
+    $('.lesson<%= @lesson.id %>').find('p.description').text('<%= @lesson.description %>');
+  <% end %>
+<% end %>

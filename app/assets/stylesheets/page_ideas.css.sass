@@ -1,0 +1,134 @@
+#ideas
+  margin-top: 20px
+
+.idea
+  display: block
+  margin-bottom: 30px
+  background-color: $theme-neutral-light
+
+  @extend %content-shadow
+
+  -webkit-border-radius: 2px
+  -moz-border-radius: 2px
+  border-radius: 2px
+
+  .idea-header, .idea-body, .idea-footer
+    display: block
+    padding: 10px 15px
+
+  .idea-header
+    -webkit-border-top-left-radius: 2px
+    -webkit-border-top-right-radius: 2px
+    -moz-border-radius-topleft: 2px
+    -moz-border-radius-topright: 2px
+    border-top-left-radius: 2px
+    border-top-right-radius: 2px
+
+    position: relative
+    background-color: $theme-color-1-2
+    color: $theme-neutral-light
+    height: 6em
+
+    a, a:hover, a:visited, a:active
+      color: #fff
+      display: block
+      
+    .dotdotdot-wrapper 
+      margin-top: 25px
+      height: 3.5em
+
+    .idea-delete
+      font-size: 1.3em
+      position: absolute
+      top: 5px
+      right: 15px
+
+  .idea-body
+    .dotdotdot-wrapper
+      height: 8em
+      a, a:hover, a:visited, a:active
+      color: $gray-darker
+
+  .idea-footer
+    a, a:hover, a:visited, a:active
+      color: $gray-dark
+
+
+#ideas-show, #response-submit
+  .idea-content
+    @extend %content-shadow
+    background-color: $theme-neutral-light
+
+    .idea-header
+      padding: 30px 30px
+      display: block
+      border-bottom: 1px solid $theme-color-1-3
+
+      background-color: $theme-color-1-2
+      color: $theme-neutral-light
+
+      h1
+        margin: 0 0 30px 0
+
+    .idea-body
+      display: block
+
+      h2
+        margin: 15px 0 10px 0
+
+      .lesson
+        .lesson-status, .step-status
+          width: 75px
+          text-align: center
+
+        .lesson-status
+          display: inline-block
+
+        h2, h4
+          display: inline-block
+
+        p
+          margin-left: 80px
+
+        .step
+          display: block
+
+          .step-status
+            float: left
+
+          .step-description
+            margin-left: 75px
+
+            .questions-and-answers
+              background-color: $gray-lighter
+              padding: 15px 15px
+              @extend %content-border-radius
+
+              .question, .answer
+                display: block
+              .question
+                font-size: 1.15em
+                color: $gray-dark
+                padding-bottom: 10px
+              .answer
+                padding-bottom: 35px
+
+    .idea-actions
+      padding: 30px 15px
+      border-top: 1px solid $gray-lighter
+
+      .right
+        text-align: right
+
+  
+#ideas-show
+  .idea-body
+    padding: 15px 30px 30px 5px
+
+#response-submit
+  .idea-body
+    padding: 30px 30px
+
+    .form-group
+      margin-bottom: 30px
+    

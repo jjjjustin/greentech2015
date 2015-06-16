@@ -1,0 +1,106 @@
+%content-shadow
+  -moz-box-shadow: 0 0 5px $gray
+  -webkit-box-shadow: 0 0 5px $gray
+  box-shadow: 0 0 5px $gray
+
+%content-border-radius
+  -webkit-border-radius: 2px
+  -moz-border-radius: 2px
+  border-radius: 2px
+
+// jquery sortable
+body.dragging, body.dragging *
+  cursor: move !important
+
+.dragged
+  position: absolute
+  top: 0
+  opacity: .5
+  z-index: 2000
+
+ol.sortable
+  margin: 0 0 0 0
+  padding-left: 0px
+
+  min-height: 10px
+  li
+    display: block
+    padding: 7px
+
+    i.icon-move
+      padding-left: 7px
+      float: left
+      cursor: move
+
+    .content
+      margin-left: 50px
+
+  li.placeholder
+    position: relative
+    margin: 0
+    padding: 0
+    border: none
+    &:before
+      position: absolute
+      content: ""
+      width: 0
+      height: 0
+      margin-top: -5px
+      left: -5px
+      top: -4px
+      border: 5px solid transparent
+      border-left-color: $brand-danger
+      border-right: none
+
+      
+
+// common
+body
+  padding-top: 70px
+  padding-bottom: 50px
+  background-image: image-url('retina_wood.png')
+  background-repeat: repeat
+  background-position: top left
+  background-attachment: scroll
+
+a, a:visited, a:hover, a:active
+  text-decoration: none
+
+.completed
+  color: $theme-color-2-1
+.in-progress
+  color: $gray-dark
+.not-started
+  color: $gray-light
+
+.policy
+  @extend %content-shadow
+  @extend %content-border-radius
+  background-color: rgba(255, 255, 255, 0.5)
+  padding: 30px 60px
+
+  h1, h2
+    text-align: center
+  h1
+    margin: 0 0
+  h2
+    margin: 30px 0 10px 0
+
+.form-content
+  @extend %content-shadow
+  @extend %content-border-radius
+  background-color: $theme-neutral-light
+
+  .form-header
+    padding: 30px 30px
+    border-bottom: 1px solid $gray-lighter
+    h1
+      margin: 0 0
+  .form-body
+    padding: 30px 30px
+
+    .form-group
+      margin-bottom: 30px
+
+    .devise-shared-links
+      margin-top: 15px

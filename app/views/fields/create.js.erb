@@ -1,0 +1,4 @@
+<% unless @field.errors.any? %>
+  $("#fields").append("<%= escape_javascript(render @field) %>");
+  $('#field_form').find('textarea, input:not([type=submit]):not([type=hidden])').val('');
+<% end %>

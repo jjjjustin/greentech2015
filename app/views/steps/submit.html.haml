@@ -1,0 +1,68 @@
+#response-submit
+  .row
+    .col-md-12
+      %ol.breadcrumb
+        %li
+          = link_to 'My Ideas', ideas_path
+        %li
+          = link_to @idea.name, @idea
+        %li
+          = 'Lesson ' + @lesson.position.to_s + ': ' + @lesson.title
+        %li
+          = 'Step ' + @step.position.to_s + ': ' + @step.title
+
+  .row
+    .col-md-12
+      = simple_form_for @step, html: { class: "answer-submit-form edit-step" } do |f|
+        .idea-content
+          .idea-header
+            %h1
+              = 'Step ' + @step.position.to_s + ': ' + @step.title
+            %p
+              - if @step.description.blank?
+                No description available.
+              - else
+                = @step.description
+
+    
+          .idea-body
+      
+            %input{name: "idea", type: "hidden", value: @idea.id }/
+
+            - @step.fields.each do |field|
+              .question
+
+                - field_answers = []
+                - field.answers.each do |answer|
+                  - field_answers.push(answer.value)
+
+                = f.simple_fields_for :responses, field.responses.where(idea_id: @idea.id).first || Response.new do |a|
+
+                  = a.input :idea_id, as: :hidden, input_html: { value: @idea.id }
+                  = a.input :step_id, as: :hidden, input_html: { value: @step.id }
+                  = a.input :field_id, as: :hidden, input_html: { value: field.id }
+
+                  - case field.question_type
+                  - when 'Text'
+                    = a.input :value, label: field.question
+                  - when 'Number'
+                    = a.input :value, label: field.question, as: :decimal
+                  - when 'MultiChoice'
+                    = a.input :value, wrapper: :vertical_radio_and_checkboxes, label: field.question, as: :radio_buttons, collection: field_answers
+                  - when 'Dropdown'
+                    = a.input :value, label: field.question, as: :select, collection: field_answers
+                  - when 'Checkbox'
+                    = a.input :value, wrapper: :vertical_radio_and_checkboxes, label: field.question, as: :check_boxes, collection: field_answers
+
+          .idea-actions.clearfix
+            .col-md-6
+              = button_tag(type: 'submit', class: "btn btn-primary save_responses") do
+                %i.fa.fa-check-circle-o
+                save answers
+              
+            .col-md-6.right
+              - if @step.prev_step
+                = link_to 'Previous Step', submit_step_path(@step.prev_step, idea: @idea.id), class: 'btn btn-info'
+              - if @step.next_step
+                = link_to 'Next Step', submit_step_path(@step.next_step, idea: @idea.id), class: 'btn btn-info'
+

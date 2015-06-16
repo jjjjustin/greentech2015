@@ -1,0 +1,86 @@
+#template
+  margin-top: 30px
+
+  .action
+    color: $gray-dark
+
+  ol.sortable-lessons
+    li.lesson
+      border: 1px solid $gray-light
+      border-left: 3px solid $theme-color-1-2
+      border-bottom: none
+      background-color: $theme-neutral-light
+
+      &:last-child
+        border-bottom: 1px solid $gray-lighter
+
+      .icon-move, .lesson-header
+        font-size: 2em
+
+      .icon-move
+        padding-top: 7px
+
+      .lesson-header, .lesson-actions
+        display: inline-block
+
+      .lesson-header
+        width: 70%
+        vertical-align: middle
+
+      .lesson-actions
+        width: 29%
+        text-align: right
+        vertical-align: middle
+
+        .action
+          font-size: 1.4em
+          margin-left: 10px
+          margin-right: 10px
+          cursor: pointer
+
+    li.placeholder
+      &:before
+        border: 5px solid transparent
+        border-left-color: $theme-color-1-2
+        border-right: none
+
+    ol.sortable-steps
+      li.step
+        margin-left: 40px
+        border: 1px solid $gray-lighter
+        border-left: 3px solid $theme-color-1-3
+        border-bottom: none
+        background-color: $theme-neutral-light
+        
+        &:last-child
+          border-bottom: 1px solid $gray-lighter
+
+        .icon-move, .step-header
+          font-size: 1.25em
+
+        .icon-move
+          padding-top: 7px
+
+        .step-header, .step-actions
+          display: inline-block
+
+        .step-header
+          width: 70%
+          vertical-align: middle
+
+        .step-actions
+          width: 29%
+          text-align: right
+          vertical-align: middle
+          cursor: pointer
+
+          .action
+            margin-left: 10px
+            margin-right: 10px
+
+      li.placeholder
+        &:before
+          border: 5px solid transparent
+          border-left-color: $theme-color-1-3
+          border-right: none
+

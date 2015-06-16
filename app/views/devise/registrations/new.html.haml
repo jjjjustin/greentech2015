@@ -1,0 +1,31 @@
+.col-md-12
+  .form-content
+    .form-header
+      %h1
+        Sign Up
+      
+    .form-body  
+      / %p
+      /   %strong 30-day free trial
+      /   with no credit card required.
+      / %p Paid plans start at just $9.99/mo.
+      / %br
+
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = f.error_notification
+        .form-inputs
+          = f.input :email, required: true, autofocus: true
+          = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable)
+          = f.input :password_confirmation, required: true
+        .form-actions
+          = button_tag(type: 'submit', class: "btn btn-primary btn-lg") do
+            %i.fa.fa-check-circle-o
+            Start Now
+  
+        = render "devise/shared/links"
+
+        %p
+          By signing up, you agree to our
+          = link_to 'terms of service.', terms_path
+          You can view our
+          = link_to 'privacy policy here.', privacy_path

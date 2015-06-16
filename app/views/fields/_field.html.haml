@@ -1,0 +1,67 @@
+%li.field{'data-id' => field.id, class: 'field'+field.id.to_s}
+  %i.fa.fa-bars.icon-move.move-field
+  .content
+    .field-header
+      = field.question
+    .field-actions
+      %span.action
+        %i.fa.fa-cog{"data-target" => "#updateFieldModal#{field.id}", "data-toggle" => "modal"}
+
+        = link_to field, method: :delete, data: { confirm: 'Are you sure you want to delete question '+field.question }, title: 'delete '+field.question, class: 'field-delete' do
+          &times;
+
+  .answers
+    - case field.question_type
+    - when 'Text'
+      %textarea.form-control{:rows => "2"}
+    - when 'MultiChoice'
+      - field.answers.each do |answer|
+        .radio
+          %label
+            %input{id: 'optionsRadios'+answer.id.to_s, :name => "optionsRadios", :type => "radio", :value => answer.value}
+              = answer.value
+    - when 'Number'
+      %input.form-control{:type => "number"}/
+    - when 'Checkbox'
+      - field.answers.each do |answer|
+        .checkbox
+          %label
+            %input{:type => "checkbox"}
+              = answer.value
+    - when 'Dropdown'
+      %select.form-control
+        - field.answers.each do |answer|
+          %option
+            = answer.value
+    
+
+
+
+  / Edit field modal
+  .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", id: "updateFieldModal#{field.id}"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+            %span.sr-only Close
+          %h4#myModalLabel.modal-title
+            Update Field
+
+        = simple_form_for field, remote: true do |f|
+          .modal-body
+            = f.input :question
+            = f.input :question_type, collection: ["Text", "MultiChoice", "Number", "Checkbox", "Dropdown"], prompt: "Select question type"
+            = f.input :step_id, as: :hidden, input_html: { value: @step.id }
+            
+            .field_answers
+              %p
+                Add answer choices for multiple choice, checkbox, and dropdown question types below.
+              = f.simple_fields_for :answers do |answer|
+                = render 'answer_fields', :f => answer
+              .links
+                = link_to_add_association 'add answer', f, :answers, :class => 'btn btn-info btn-sm'
+          .modal-footer
+            = button_tag(type: 'submit', class: "btn btn-primary btn-lg") do
+              %i.fa.fa-check-circle-o
+              Update Field

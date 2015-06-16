@@ -1,0 +1,4 @@
+<% unless @step.errors.any? %>
+  $('#updateStepModal<%= @step.id %>').modal('hide');
+  $('.step<%= @step.id %>').find('.step-header').find('a').text('Step: <%= @step.title %>');
+<% end %>

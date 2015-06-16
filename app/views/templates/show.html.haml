@@ -1,0 +1,36 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        = @template.name
+
+    / Button trigger modal
+    %button.btn.btn-primary.btn-lg{"data-target" => "#addLessonModal", "data-toggle" => "modal"}
+      Add Lesson
+
+.row
+  .col-md-12
+    #template
+      %ol#lessons.sortable.sortable-lessons{'data-update-lesson-url' => sort_lessons_path, 'data-update-step-url' => sort_steps_path}
+        = render @lessons
+    
+
+/ Modal
+#addLessonModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &times;
+          %span.sr-only Close
+        %h4#myModalLabel.modal-title Add Lesson
+
+      = simple_form_for @lesson, remote: true do |f|
+        .modal-body
+          = f.input :title, required: true
+          = f.input :description
+          = f.input :template_id, as: :hidden, input_html: { value: @template.id }
+        .modal-footer
+          = button_tag(type: 'submit', class: "btn btn-primary") do
+            %i.fa.fa-check-circle-o
+            Add Lesson

@@ -1,0 +1,11 @@
+.col-md-12
+  .form-content
+    .form-header
+      %h1
+        Edit Profile
+    .form-body
+      = simple_form_for @user_profile do |f|
+        = render partial: 'form', locals: { f: f }
+
+    
+

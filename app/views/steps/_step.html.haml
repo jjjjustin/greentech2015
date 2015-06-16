@@ -1,0 +1,35 @@
+%li.step{'data-id' => step.id, class: 'step'+step.id.to_s}
+  %i.fa.fa-bars.icon-move.move-step
+  .content
+    .step-header
+      = link_to 'Step: '+step.title, step
+
+    .step-actions
+      %span.action
+        %i.fa.fa-cog{"data-target" => "#updateStepModal#{step.id}", "data-toggle" => "modal"}
+
+      %span.action
+        = link_to step, method: :delete, data: { confirm: 'Are you sure you want to delete step '+step.title }, title: 'delete '+step.title, class: 'step-delete' do
+          &times;
+
+
+  / Edit step modal
+  .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", id: "updateStepModal#{step.id}"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &times;
+            %span.sr-only Close
+          %h4#myModalLabel.modal-title
+            Update
+            = step.title
+
+        = simple_form_for step, remote: true do |f|
+          .modal-body
+            = f.input :title, required: true
+            = f.input :description
+          .modal-footer
+            = button_tag(type: 'submit', class: "btn btn-danger") do
+              %i.fa.fa-check-circle-o
+              Update Step

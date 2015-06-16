@@ -1,0 +1,17 @@
+.col-md-12
+  %ol.breadcrumb
+    %li
+      = link_to 'My Ideas', ideas_path
+    %li New
+
+  .form-content
+    .form-header
+      %h1
+        New Idea
+    .form-body
+      = simple_form_for @idea do |f|
+        = render partial: 'form', locals: { f: f }
+
+        = button_tag(type: 'submit', class: "btn btn-primary btn-lg") do
+          %i.fa.fa-check-circle-o
+          Add Idea

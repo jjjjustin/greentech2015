@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stripe_plan_id: MyString
+  title: MyString
+  idea_max: 1
+  price: 9.99
+
+two:
+  stripe_plan_id: MyString
+  title: MyString
+  idea_max: 1
+  price: 9.99

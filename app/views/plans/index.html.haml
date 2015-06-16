@@ -1,0 +1,51 @@
+.row
+  .col-md-12
+    .page-header
+      %h1
+        Select a Plan
+
+- if @current_plan || current_user.trial?
+  .row
+    .col-md-12
+      .current-plan-info
+        - if @current_plan
+          %span
+            = link_to 'Update credit card information', plan_edit_card_path(@current_plan.id)
+          - unless @current_plan.plan_id.blank?
+            %span
+              = link_to 'Unsubscribe from current plan', plan_unsubscribe_path(@current_plan.id), method: :patch
+        - if current_user.trial?
+          %span
+            Trial ends on
+            = (current_user.created_at + 30.days).strftime("%m/%d/%Y")
+
+.row
+  - @plan_options.each do |plan_option|
+    .col-md-4
+      .plan_option
+        .info
+          %h3
+            = plan_option.title
+          %h5
+            - if plan_option.idea_max >= 999
+              unlimited ideas
+            - else
+              = pluralize(plan_option.idea_max, 'idea')
+          %h4
+            = number_to_currency(plan_option.price) + '/ month'
+        .action
+          - if @current_plan.nil?
+            = link_to 'Select Plan', new_plan_path(plan_id: plan_option.stripe_plan_id), class: "btn btn-primary"
+            
+
+          - elsif @no_card
+            = link_to 'Update Card', plan_edit_card_path(@current_plan.id), class: "btn btn-danger"
+
+          - else
+            - if @current_plan.plan_id == plan_option.stripe_plan_id
+              .btn.btn-info
+                Current Plan
+            - else
+              = form_for @current_plan do |f|
+                = f.hidden_field :plan_id, value: plan_option.stripe_plan_id
+                = f.submit 'Select Plan', class: "btn btn-primary"
