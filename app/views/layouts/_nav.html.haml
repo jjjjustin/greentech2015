@@ -8,7 +8,8 @@
         %span.icon-bar
         %span.icon-bar
       = link_to root_path, class: "navbar-brand" do
-        = image_tag('nafasi logo.svg', class: "img-responsive", alt: "nafasi")
+        %h4
+          green technology
     / Collect the nav links, forms, and other content for toggling
     #main_nav.collapse.navbar-collapse
 
@@ -40,7 +41,7 @@
               %li.divider
               %li
                 = link_to "Sign Out", destroy_user_session_path, :method => :delete
-            
+
         - else
           %li
             = link_to "Sign In", new_user_session_path
